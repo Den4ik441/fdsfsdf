@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зимний вечер с луной и снежинками</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #4169E1; /* Голубой фон */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Луна */
+        .moon {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.7);
+        }
+
+        /* Падающие снежинки */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background-color: white;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            opacity: 0.8;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0.5;
+            }
+        }
+
+        /* Анимация для случайных снежинок */
+        .snowflake:nth-child(odd) {
+            animation-duration: 6s;
+        }
+
+        .snowflake:nth-child(even) {
+            animation-duration: 4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="moon"></div>
+
+    <script>
+        // Функция для создания случайных снежинок
+        function createSnowflakes() {
+            const numFlakes = 100; // Количество снежинок
+            const body = document.body;
+
+            for (let i = 0; i < numFlakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+
+                // Случайные начальные позиции снежинок
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 3 + 3 + 's'; // Случайная продолжительность анимации
+
+                body.appendChild(snowflake);
+            }
+        }
+
+        // Создаем снежинки при загрузке страницы
+        window.onload = createSnowflakes;
+    </script>
+</body>
+</html>
